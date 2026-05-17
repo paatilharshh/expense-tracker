@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Expense Tracker</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <div class="container">
+            <!-- Header -->
+            <h1>Expense Tracker</h1>
+            <p>May 2026</p>
+
+            <!-- Summary card section -->
+            <div class="summary">
+               <div id="total-amount">
+                <p>Total spent</p>
+                <h2></h2>
+               </div>
+               <div id="personal-total">
+                <p>Personal</p>
+                <h2></h2>
+               </div>
+               <div id="business-total">
+                <p>Business</p>
+                <h2></h2>
+               </div>
+            </div>
+
+            <!--Add expense form-->
+            <form id="expense-form">
+                <h3>ADD EXPENSE</h3>
+
+                <label for="expense-name">Name</label>
+                <input type="text" id="expense-name" placeholder="e.g.Lunch" required>
+
+                <label for="expense-amount">Amount</label>
+                <input type="number" id="expense-amount" placeholder="0.00" required>
+
+                <label for="expense-type">Type</label>
+                <select id="expense-type" required>
+                    <option>Personal</option>
+                    <option>Business</option>
+                </select>
+
+                <label for="expense-date">Date</label>
+                <input type="date" id="expense-date" required>
+
+                <button type="submit">+ Add expense</button>
+            </form>
+
+            <!--Expense list-->
+            <h3>RECENT EXPENSE</h3>
+            <ul id="expense-list"></ul>
+        </div>
+        <script src="app.js"></script>
+    </body>
+</html>
