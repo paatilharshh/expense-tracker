@@ -40,6 +40,9 @@ expenseForm.addEventListener("submit", function(event){
     //Rendering expense list
     renderExpenses();
 
+    //Update the summary section
+    updateSummary();
+
     //Clearing inputs
     expenseName.value = "";
     expenseAmt.value = "";
@@ -49,7 +52,6 @@ expenseForm.addEventListener("submit", function(event){
 
 //Render the expense list
 function renderExpenses(){
-
 
     expenseList.innerHTML = "";
 
@@ -66,5 +68,29 @@ function renderExpenses(){
 
 //Update the summary card
 function updateSummary(){
+    
+    // const totalSpent = expenses.reduce((acc, curr) => acc + curr.amount, 0);
+    // const personalSpent = expenses.filter(expense => expense.type === "Personal").reduce((acc, curr) => acc + curr.amount, 0);
+    // const businessSpent = expenses.filter(expense => expense.type === "Business").reduce((acc, curr) => acc + curr.amount, 0);
+
+    //Calculate all totals in single pass
+    const totals = expenses.reduce((acc, curr) => {
+
+        acc.total += curr.amount;
+        if(curr.type === "Personal") acc.personal += curr.amount;
+        if(curr.type === "Business") acc.business += curr.amount;
+        
+        return acc;
+    }, {total: 0, personal: 0, business: 0});
+
+    //Access the heading from each summary heading
+    const totalSpentHeading = totalAmt.querySelector("h2");
+    const personalSpentHeading = personalTotal.querySelector("h2");
+    const businessSpentHeading = businessTotal.querySelector("h2");
+
+    //Upadating values in summary section
+    totalSpentHeading.textContent = `₹${totals.total.toFixed(2)}`;
+    personalSpentHeading.textContent = `₹${totals.personal.toFixed(2)}`;
+    businessSpentHeading.textContent = `₹${totals.business.toFixed(2)}`;
     
 }
