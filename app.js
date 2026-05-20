@@ -36,10 +36,8 @@ expenseForm.addEventListener("submit", function(event){
 
     //Pushing expense object in the array
     expenses.push(expense);
-    
     //Rendering expense list
     renderExpenses();
-
     //Update the summary section
     updateSummary();
 
@@ -59,11 +57,20 @@ function renderExpenses(){
     expenses.forEach((expense) => {
 
         const li = document.createElement("li");
+        const deletebtn = document.createElement("button");
+        deletebtn.textContent = "Delete";
+        deletebtn.dataset.id = expense.id;
+
+        deletebtn.addEventListener("click", () => {
+            deleteExpense(Number(deletebtn.dataset.id))
+        });
 
         li.textContent = `${expense.name}, ${expense.type}, ${expense.date}, ₹${expense.amount.toFixed(2)}`;
+        li.appendChild(deletebtn);
 
         expenseList.appendChild(li);
-    })
+
+    }) 
 }
 
 //Update the summary card
@@ -92,5 +99,19 @@ function updateSummary(){
     totalSpentHeading.textContent = `₹${totals.total.toFixed(2)}`;
     personalSpentHeading.textContent = `₹${totals.personal.toFixed(2)}`;
     businessSpentHeading.textContent = `₹${totals.business.toFixed(2)}`;
-    
+
 }
+
+//Delete expense 
+function deleteExpense(id){
+
+    //Reassign expenses in expense array
+    expenses = expenses.filter(expense => expense.id !== id);
+
+    //Rnder new list
+    renderExpenses();
+    //Update summary card
+    updateSummary();
+}
+
+
